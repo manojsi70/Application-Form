@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./form.css";
 import bg from "../image/bg.jpg";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 function EnquiryForm() {
    const [formData, setFormData] = useState({
       firstName: "",
@@ -26,7 +28,6 @@ function EnquiryForm() {
       let inputValue = e.target.value;
       oldData[inputName] = inputValue;
       setFormData(oldData);
-    
    };
 
    let FormSumbit = (e) => {
@@ -46,12 +47,53 @@ function EnquiryForm() {
          country: formData.country,
          index: formData.index,
       };
+      if (formData.index === "") {
+               let CheckData = userData.filter((v) => v.number == formData.number);
+               if (CheckData.length == 1) {
+                  toast.error("Number already exists in the database");
+               } else {
+                  let oldUsesrData = [...userData, currentUserFormdata]; //old Array + New Array Element
+                  console.log(oldUsesrData);
+                  setUserData(oldUsesrData);
+                  toast.success("Data Submitted Successfully");
 
-      let oldUsesrData = [...userData, currentUserFormdata]; //old Array + New Array Element
-      console.log(oldUsesrData);
-      setUserData(oldUsesrData);
-      setFormData(
-        {
+                  setFormData({
+                     firstName: "",
+                     lastName: "",
+                     courses: "",
+                     dob: "",
+                     gender: "",
+                     collegeName: "",
+                     number: "",
+                     address1: "",
+                     address2: "",
+                     city: "",
+                     state: "",
+                     zipCode: "",
+                     country: "",
+                     index: "",
+                  }
+               )
+         }
+      }
+      else {
+         let editdata = formData.index;
+         let oldData = userData;
+         oldData[editdata]['firstName'] = formData.firstName;
+         oldData[editdata]['lastName'] = formData.lastName;
+         oldData[editdata]['courses'] = formData.courses;
+         oldData[editdata]['dob'] = formData.dob;
+         oldData[editdata]['gender'] = formData.gender;
+         oldData[editdata]['collegeName'] = formData.collegeName;
+         oldData[editdata]['number'] = formData.number;
+         oldData[editdata]['address1'] = formData.address1;
+         oldData[editdata]['address2'] = formData.address2;
+         oldData[editdata]['city'] = formData.city;
+         oldData[editdata]['state'] = formData.state;
+         oldData[editdata]['zipCode'] = formData.zipCode;
+         oldData[editdata]['country'] = formData.country;
+         setUserData(oldData);
+         setFormData({
             firstName: "",
             lastName: "",
             courses: "",
@@ -65,14 +107,28 @@ function EnquiryForm() {
             state: "",
             zipCode: "",
             country: "",
-            index: "",   
-        }
+            index: "",
+         }
       )
+
+      }
       e.preventDefault();
+   };
+
+   let deleteRow = (index) => {
+      let newUserData = userData.filter((v, i) => i != index);
+      toast.success("Data deleted Successfully");
+      setUserData(newUserData);
+   };
+   let editRow = (iNumber) => {
+      let editData = userData.filter((v, i) => i == iNumber)[0];
+      editData["index"] = iNumber;
+      setFormData(editData);
    };
 
    return (
       <div class="container main-container">
+         <ToastContainer />
          <img className="bg-image" src={bg} alt="" />
          <div class="row">
             <div class="col col-md-1"></div>
@@ -99,6 +155,7 @@ function EnquiryForm() {
                                  name="firstName"
                                  value={formData.firstName}
                                  placeholder="First Name"
+                                 required="required"
                               />
                            </div>
 
@@ -116,7 +173,7 @@ function EnquiryForm() {
                         </div>
                         <div class="row mb-5">
                            <label
-                              for="inputName"
+                              for="CousesName"
                               class="col-sm-2 col-form-label"
                            >
                               Which course are you applying for?
@@ -129,6 +186,7 @@ function EnquiryForm() {
                                  id=""
                                  className="Select-option inputsection"
                                  value={formData.courses}
+                                 required
                               >
                                  <option value="">Select</option>
                                  <option>
@@ -240,6 +298,7 @@ function EnquiryForm() {
                                     id="inputdate"
                                     name="dob"
                                     value={formData.dob}
+                                    required
                                     placeholder="Date of birth"
                                  />
                               </div>
@@ -257,7 +316,7 @@ function EnquiryForm() {
                                     onChange={getValue}
                                     name="gender"
                                     value={formData.gender}
-                                    id=""
+                                    required
                                  >
                                     <option>Select</option>
                                     <option>Male</option>
@@ -279,6 +338,7 @@ function EnquiryForm() {
                                     name="collegeName"
                                     value={formData.collegeName}
                                     id=""
+                                    required
                                  >
                                     <option value="">Select</option>
                                     <option>
@@ -416,6 +476,7 @@ function EnquiryForm() {
                                     class="form-control inputsection"
                                     id="inputnumber"
                                     onChange={getValue}
+                                    required
                                     name="number"
                                     value={formData.number}
                                     placeholder="Contact number"
@@ -481,6 +542,7 @@ function EnquiryForm() {
                                     id=""
                                     onChange={getValue}
                                     className="states inputsection"
+                                    required
                                  >
                                     <option>State</option>
                                     <option>Andhra Pradesh (Amaravati)</option>
@@ -554,7 +616,7 @@ function EnquiryForm() {
 
                            <div class="row mb-3 btn-div">
                               <button type="sumbit" className="btn-sumbit">
-                                 Add
+                                 {formData.index !== "" ? "Update" : "Save"}
                               </button>
                            </div>
                         </div>
@@ -587,36 +649,43 @@ function EnquiryForm() {
                   </tr>
                </thead>
                <tbody className="table-body">
-                  {userData.length >= 1 ? (  
-                    userData.map((data, i) => {
+                  {userData.length >= 1 ? (
+                     userData.map((data, i) => {
                         return (
-                            <tr key={i}>
-                                <td>{i+1}</td>
-                               <td>{data.firstName}</td>
-                               <td>{data.lastName}</td>
-                               <td>{data.courses}</td>
-                               <td>{data.dob}</td>
-                               <td>{data.gender}</td>
-                               <td>{data.collegeName}</td>
-                               <td>{data.number}</td>
-                               <td>{data.address1}</td>
-                               <td>{data.address2}</td>
-                               <td>{data.city}</td>
-                               <td>{data.state}</td>
-                               <td>{data.zipCode}</td>
-                               <td>{data.country}</td>
-                               <td className="btn-td">
-                                  <button type="button" className="btn btn-primary">
-                                     Edit
-                                  </button>
-                                  <button type="button" className="btn btn-danger">
-                                     Delete
-                                  </button>
-                               </td>
-                            </tr>
- 
-                        )
-                    })
+                           <tr key={i}>
+                              <td>{i + 1}</td>
+                              <td>{data.firstName}</td>
+                              <td>{data.lastName}</td>
+                              <td>{data.courses}</td>
+                              <td>{data.dob}</td>
+                              <td>{data.gender}</td>
+                              <td>{data.collegeName}</td>
+                              <td>{data.number}</td>
+                              <td>{data.address1}</td>
+                              <td>{data.address2}</td>
+                              <td>{data.city}</td>
+                              <td>{data.state}</td>
+                              <td>{data.zipCode}</td>
+                              <td>{data.country}</td>
+                              <td className="btn-td">
+                                 <button
+                                    onClick={() => editRow(i)}
+                                    type="button"
+                                    className="btn btn-primary"
+                                 >
+                                    Edit
+                                 </button>
+                                 <button
+                                    onClick={() => deleteRow(i)}
+                                    type="button"
+                                    className="btn btn-danger"
+                                 >
+                                    Delete
+                                 </button>
+                              </td>
+                           </tr>
+                        );
+                     })
                   ) : (
                      <tr>
                         <td colSpan="15">No Data Available</td>
