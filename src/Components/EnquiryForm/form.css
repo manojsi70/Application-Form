@@ -1,0 +1,105 @@
+.bg-image{
+    z-index: -2;
+    position: fixed;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    bottom: 0;
+    top: 0;
+    right: 0;
+}
+
+.main-container{
+    font-family:emoji;
+
+}
+.form-div{
+    margin: 40px;
+}
+.card-div{
+    background-color: #fad7d742;
+    font-size: larger;
+    color: wheat;
+    box-shadow: 0px 2px 5px 2px;
+}
+.Select-option{
+    height: 44px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 22px;
+}
+h2{
+    text-align: center;
+    font-size: 34px;
+    display: block;
+}
+.genders{
+    height: 38px;
+    width: 100%;
+    border-radius: 10px;
+}
+.Colleges{
+    height: 44px;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 22px;
+}
+.states{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+.countrys{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px
+}
+.btn-sumbit{
+    height: 40px;
+    width: 300px;
+    background: beige;
+    border-radius: 10px;
+    color: black;
+    font-size: large;
+}
+.btn-div{
+    justify-content: center;
+}
+.inputsection{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-bottom: 5px solid #7568cc99;
+    background-color: #fad7d742;
+    color: rgb(33, 22, 13);
+}
+.table-div{
+    left: 5px;
+    right: 5px;
+    position: absolute;
+    background-color: #fad7d742;
+    color: wheat;
+    box-shadow: 0px 2px 5px 2px;
+}
+.table-thead{
+    background-color: #7568cc99;
+    color: white;
+    font-weight: bold;
+    border: 2px;
+
+}
+.table-thead tr th{
+    border-right: 2px solid;
+}
+.table-body{
+    overflow-y: auto;
+    height: 100px;
+}
+/* .btn-td{
+    display: inline;
+
+} */
+
+.table-body tr td{
+    border: 2px solid;
+}
