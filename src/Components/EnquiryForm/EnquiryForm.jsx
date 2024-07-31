@@ -48,50 +48,48 @@ function EnquiryForm() {
          index: formData.index,
       };
       if (formData.index === "") {
-               let CheckData = userData.filter((v) => v.number == formData.number);
-               if (CheckData.length == 1) {
-                  toast.error("Number already exists in the database");
-               } else {
-                  let oldUsesrData = [...userData, currentUserFormdata]; //old Array + New Array Element
-                  console.log(oldUsesrData);
-                  setUserData(oldUsesrData);
-                  toast.success("Data Submitted Successfully");
+         let CheckData = userData.filter((v) => v.number == formData.number);
+         if (CheckData.length == 1) {
+            toast.error("Number already exists in the database");
+         } else {
+            let oldUsesrData = [...userData, currentUserFormdata]; //old Array + New Array Element
+            console.log(oldUsesrData);
+            setUserData(oldUsesrData);
+            toast.success("Data Submitted Successfully");
 
-                  setFormData({
-                     firstName: "",
-                     lastName: "",
-                     courses: "",
-                     dob: "",
-                     gender: "",
-                     collegeName: "",
-                     number: "",
-                     address1: "",
-                     address2: "",
-                     city: "",
-                     state: "",
-                     zipCode: "",
-                     country: "",
-                     index: "",
-                  }
-               )
+            setFormData({
+               firstName: "",
+               lastName: "",
+               courses: "",
+               dob: "",
+               gender: "",
+               collegeName: "",
+               number: "",
+               address1: "",
+               address2: "",
+               city: "",
+               state: "",
+               zipCode: "",
+               country: "",
+               index: "",
+            });
          }
-      }
-      else {
+      } else {
          let editdata = formData.index;
          let oldData = userData;
-         oldData[editdata]['firstName'] = formData.firstName;
-         oldData[editdata]['lastName'] = formData.lastName;
-         oldData[editdata]['courses'] = formData.courses;
-         oldData[editdata]['dob'] = formData.dob;
-         oldData[editdata]['gender'] = formData.gender;
-         oldData[editdata]['collegeName'] = formData.collegeName;
-         oldData[editdata]['number'] = formData.number;
-         oldData[editdata]['address1'] = formData.address1;
-         oldData[editdata]['address2'] = formData.address2;
-         oldData[editdata]['city'] = formData.city;
-         oldData[editdata]['state'] = formData.state;
-         oldData[editdata]['zipCode'] = formData.zipCode;
-         oldData[editdata]['country'] = formData.country;
+         oldData[editdata]["firstName"] = formData.firstName;
+         oldData[editdata]["lastName"] = formData.lastName;
+         oldData[editdata]["courses"] = formData.courses;
+         oldData[editdata]["dob"] = formData.dob;
+         oldData[editdata]["gender"] = formData.gender;
+         oldData[editdata]["collegeName"] = formData.collegeName;
+         oldData[editdata]["number"] = formData.number;
+         oldData[editdata]["address1"] = formData.address1;
+         oldData[editdata]["address2"] = formData.address2;
+         oldData[editdata]["city"] = formData.city;
+         oldData[editdata]["state"] = formData.state;
+         oldData[editdata]["zipCode"] = formData.zipCode;
+         oldData[editdata]["country"] = formData.country;
          setUserData(oldData);
          setFormData({
             firstName: "",
@@ -108,9 +106,7 @@ function EnquiryForm() {
             zipCode: "",
             country: "",
             index: "",
-         }
-      )
-
+         });
       }
       e.preventDefault();
    };
@@ -628,7 +624,7 @@ function EnquiryForm() {
             <div class="col col-md-1"></div>
          </div>
          <div className="table-div">
-            <table class="table ">
+            <table class="table table-start ">
                <thead className="table-thead">
                   <tr>
                      <th scope="col">Sr. No.</th>
