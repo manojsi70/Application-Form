@@ -48,8 +48,8 @@ function EnquiryForm() {
          index: formData.index,
       };
       if (formData.index === "") {
-         let CheckData = userData.filter((v) => v.number == formData.number);
-         if (CheckData.length == 1) {
+         let CheckData = userData.filter((v) => v.number === formData.number);
+         if (CheckData.length === 1) {
             toast.error("Number already exists in the database");
          } else {
             let oldUsesrData = [...userData, currentUserFormdata]; //old Array + New Array Element
@@ -112,12 +112,12 @@ function EnquiryForm() {
    };
 
    let deleteRow = (index) => {
-      let newUserData = userData.filter((v, i) => i != index);
+      let newUserData = userData.filter((v, i) => i !== index);
       toast.success("Data deleted Successfully");
       setUserData(newUserData);
    };
    let editRow = (iNumber) => {
-      let editData = userData.filter((v, i) => i == iNumber)[0];
+      let editData = userData.filter((v, i) => i === iNumber)[0];
       editData["index"] = iNumber;
       setFormData(editData);
    };
