@@ -604,8 +604,8 @@ function EnquiryForm() {
                                     <option>United Kingdom</option>
                                     <option>Afghanistan</option>
                                     <option>Albania</option>
-                                    <option>Algeria</option>
-                                    ... and so on...
+                                    <option>Algeria.</option>
+                                    .. and so on..
                                  </select>
                               </div>
                            </div>
